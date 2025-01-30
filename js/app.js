@@ -41,17 +41,16 @@ Hint: Return a new object literal from the callback that looks like:
       { first: "First Name", last: "Last Name" }
 */
 
-// curious why this doesn't quite work?
+// curious why this doesn't work for the one-line arrow evaluation?
 // const inventorNames = inventors.map(inventor => {first: inventor.first, last: inventor.last});
 
 // Complete the exercise in the space below:
 
 const inventorNames = inventors.map((inventor) => {
-    let output = {
+    return { // object
         first: inventor.first,
         last: inventor.last,
     };
-    return output;
 });
 
 // Check your work:
@@ -83,7 +82,7 @@ the past to those born most recently).
 
 // Complete the exercise in the space below:
 
-const sortedByBirthYear = inventors.sort((a, b) => a.year - b.year);
+const sortedByBirthYear = inventors.sort((a, b) => a.year - b.year); // MDN uses a, b
 
 // Check your work:
 console.log('Exercise 3 my result: ', sortedByBirthYear);
@@ -120,7 +119,7 @@ from an array of inventor objects
 
 // Complete the exercise in the space below:
 
-let inventorNamedAda = inventors.find(i => i.first === 'Ada');
+let inventorNamedAda = inventors.find(inventor => inventor.first === 'Ada');
 
 // Check your work:
 console.log('Exercise 4 my result: ', inventorNamedAda);
@@ -149,7 +148,7 @@ Hint: Use the String.prototype.split() method to separate the first and last
 
 // Complete the exercise in the space below:
 
-// in English: for each name, we want to split it around the comma, swap its positions, and smoosh it back together with a space
+// in English: for each name, we want to split it into a mini-array around the comma, swap the positions of the first and last names, and smoosh it back intoa string with a space
 const firstLast = people.map((person) => {
     return person.split(', ').reverse().join(' ');
 });
@@ -216,7 +215,7 @@ old or older.
 
 // Complete the exercise in the space below:
 
-let isAdultPresent = devs.some(d => (2025 - d.year) > 17);
+let isAdultPresent = devs.some(dev => (2025 - dev.year) > 17);
 
 // Check your work:
 console.log('Exercise 6 my result: ', isAdultPresent);
@@ -240,7 +239,7 @@ Use Array.prototype.every() to determine if every person in the devs array is
 
 // Complete the exercise in the space below:
 
-let isEveryone19OrOlder = devs.every(d => (2025 - d.year) > 18);
+let isEveryone19OrOlder = devs.every(dev => (2025 - dev.year) > 18);
 
 // Check your work:
 console.log('Exercise 7 my result: ', isEveryone19OrOlder);
@@ -260,7 +259,7 @@ a specific ID 823423 from an array of comment objects.
 
 // Complete the exercise in the space below:
 
-let commentById = comments.find(c => c.id === 823423);
+let commentById = comments.find(comment => comment.id === 823423);
 
 // Check your work:
 console.log('Exercise 8 my result: ', commentById);
@@ -280,7 +279,7 @@ of comment objects.
 
 // Complete the exercise in the space below:
 
-let idx = comments.findIndex(c => c.id === 123523);
+let idx = comments.findIndex(comment => comment.id === 123523);
 
 // Check your work:
 console.log('Exercise 9 my result: ', idx);
@@ -346,11 +345,11 @@ Hints:
 
 // Complete the exercise in the space below:
 
-let travelMethodCounts = travelMethods.reduce((accumulator, method) => {
-    if (accumulator[method]) { // if we already have this travel method, increment
-        accumulator[method] += 1;
+let travelMethodCounts = travelMethods.reduce((accumulator, travelMethod) => {
+    if (accumulator[travelMethod]) { // if we already have this travel method, increment
+        accumulator[travelMethod] += 1;
     } else { // otherwise, initialize this travel method
-        accumulator[method] = 1;
+        accumulator[travelMethod] = 1;
     };
     return accumulator;
 }, {});
