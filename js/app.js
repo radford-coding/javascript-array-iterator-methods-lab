@@ -13,9 +13,8 @@ born in the 1500's.
   the years 1500 and 1599.
 */
 
-let veryOldInventors = [];
-
 // Complete the exercise in the space below:
+const veryOldInventors = inventors.filter(inventor => inventor.year > 1499 && inventor.year < 1600); // arrow function with implicit return
 
 // Check your work:
 console.log('Exercise 1 my result: ', veryOldInventors);
@@ -42,9 +41,18 @@ Hint: Return a new object literal from the callback that looks like:
       { first: "First Name", last: "Last Name" }
 */
 
-let inventorNames = [];
+// curious why this doesn't quite work?
+// const inventorNames = inventors.map(inventor => {first: inventor.first, last: inventor.last});
 
 // Complete the exercise in the space below:
+
+const inventorNames = inventors.map((inventor) => {
+    let output = {
+        first: inventor.first,
+        last: inventor.last,
+    };
+    return output;
+});
 
 // Check your work:
 console.log('Exercise 2 my result: ', inventorNames);
@@ -73,9 +81,9 @@ Sort the inventors by birth date in ascending order (from those born furthest in
 the past to those born most recently).
 */
 
-let sortedByBirthYear = [];
-
 // Complete the exercise in the space below:
+
+const sortedByBirthYear = inventors.sort((a, b) => a.year - b.year);
 
 // Check your work:
 console.log('Exercise 3 my result: ', sortedByBirthYear);
@@ -110,9 +118,9 @@ from an array of inventor objects
 - Assign the found inventor object to the variable inventorNamedAda
 */
 
-let inventorNamedAda = {};
-
 // Complete the exercise in the space below:
+
+let inventorNamedAda = inventors.find(i => i.first === 'Ada');
 
 // Check your work:
 console.log('Exercise 4 my result: ', inventorNamedAda);
@@ -139,9 +147,12 @@ Hint: Use the String.prototype.split() method to separate the first and last
       After splitting the names, rearrange them to the "First Last" format.
 */
 
-let firstLast = [];
-
 // Complete the exercise in the space below:
+
+// in English: for each name, we want to split it around the comma, swap its positions, and smoosh it back together with a space
+const firstLast = people.map((person) => {
+    return person.split(', ').reverse().join(' ');
+});
 
 // Check your work:
 console.log('Exercise 5 my result: ', firstLast);
@@ -203,9 +214,9 @@ old or older.
 - Store the result (true or false) in the variable 'isAdultPresent'. 
 */
 
-let isAdultPresent = null;
-
 // Complete the exercise in the space below:
+
+let isAdultPresent = devs.some(d => (2025 - d.year) > 17);
 
 // Check your work:
 console.log('Exercise 6 my result: ', isAdultPresent);
@@ -227,9 +238,9 @@ Use Array.prototype.every() to determine if every person in the devs array is
 - Store the result (true or false) in the variable 'isEveryone19OrOlder'.
 */
 
-let isEveryone19OrOlder = null;
-
 // Complete the exercise in the space below:
+
+let isEveryone19OrOlder = devs.every(d => (2025 - d.year) > 18);
 
 // Check your work:
 console.log('Exercise 7 my result: ', isEveryone19OrOlder);
@@ -247,9 +258,9 @@ a specific ID 823423 from an array of comment objects.
 - Assign the found comment object to the variable 'commentById'.
 */
 
-let commentById = {};
-
 // Complete the exercise in the space below:
+
+let commentById = comments.find(c => c.id === 823423);
 
 // Check your work:
 console.log('Exercise 8 my result: ', commentById);
@@ -267,9 +278,9 @@ of comment objects.
 - Store the index in the variable 'idx'.
 */
 
-let idx = null;
-
 // Complete the exercise in the space below:
+
+let idx = comments.findIndex(c => c.id === 123523);
 
 // Check your work:
 console.log('Exercise 9 my result: ', idx);
@@ -299,9 +310,12 @@ Hints:
   accumulator.
 */
 
-let totalYearsLived = 0;
-
 // Complete the exercise in the space below:
+
+
+let totalYearsLived = inventors.reduce((accumulator, inventor) => {
+    return accumulator + (inventor.passed - inventor.year);
+}, 0);
 
 // Check your work:
 console.log('Level Up 1 my result: ', totalYearsLived);
@@ -330,9 +344,16 @@ Hints:
   initial value of the "accumulator".
 */
 
-let travelMethodCounts = {};
-
 // Complete the exercise in the space below:
+
+let travelMethodCounts = travelMethods.reduce((accumulator, method) => {
+    if (accumulator[method]) { // if we already have this travel method, increment
+        accumulator[method] += 1;
+    } else { // otherwise, initialize this travel method
+        accumulator[method] = 1;
+    };
+    return accumulator;
+}, {});
 
 // Check your work:
 console.log('Level Up 2 my result: ', travelMethodCounts);
